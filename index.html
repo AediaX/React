@@ -1,0 +1,3000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete React.js Mastery Guide</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #61dafb;
+            --secondary-color: #282c34;
+            --accent-color: #09d3ac;
+            --light-bg: #f8f9fa;
+            --dark-bg: #212529;
+            --text-light: #ffffff;
+            --text-dark: #212529;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: var(--text-dark);
+            scroll-behavior: smooth;
+        }
+        
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 280px;
+            background: var(--secondary-color);
+            color: var(--text-light);
+            overflow-y: auto;
+            padding: 20px;
+            z-index: 1000;
+            box-shadow: 3px 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .main-content {
+            margin-left: 280px;
+            padding: 30px;
+        }
+        
+        @media (max-width: 992px) {
+            .sidebar {
+                position: static;
+                width: 100%;
+                height: auto;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+        
+        .logo {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--primary-color);
+            margin-bottom: 30px;
+        }
+        
+        .logo h2 {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .sidebar-nav .nav-link {
+            color: var(--text-light);
+            padding: 12px 15px;
+            margin: 5px 0;
+            border-radius: 5px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .sidebar-nav .nav-link:hover,
+        .sidebar-nav .nav-link.active {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+        }
+        
+        .sidebar-nav .nav-link i {
+            margin-right: 10px;
+            width: 20px;
+        }
+        
+        .chapter {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary-color);
+        }
+        
+        .chapter h2 {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .chapter h3 {
+            color: var(--primary-color);
+            margin-top: 25px;
+        }
+        
+        .concept-card {
+            background: var(--light-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .code-block {
+            background: var(--secondary-color);
+            color: var(--text-light);
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .code-keyword {
+            color: #ff6b6b;
+        }
+        
+        .code-string {
+            color: #a5d6a7;
+        }
+        
+        .code-comment {
+            color: #78909c;
+        }
+        
+        .code-function {
+            color: #64b5f6;
+        }
+        
+        .important-note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .best-practice {
+            background: #d1ecf1;
+            border-left: 4px solid #0dcaf0;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .warning {
+            background: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        
+        .table-custom {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .table-custom th {
+            background: var(--secondary-color);
+            color: var(--text-light);
+            padding: 15px;
+        }
+        
+        .progress-indicator {
+            position: fixed;
+            top: 0;
+            left: 280px;
+            right: 0;
+            height: 5px;
+            background: var(--light-bg);
+            z-index: 1000;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .comparison-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .comparison-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .comparison-card h4 {
+            color: var(--secondary-color);
+            text-align: center;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light-bg);
+        }
+        
+        .step-by-step {
+            counter-reset: step;
+            margin: 20px 0;
+        }
+        
+        .step {
+            position: relative;
+            padding-left: 60px;
+            margin: 20px 0;
+            min-height: 50px;
+        }
+        
+        .step:before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .floating-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+        
+        .floating-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        .diagram {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px dashed var(--light-bg);
+        }
+        
+        .level-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin: 0 5px;
+        }
+        
+        .level-beginner {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .level-intermediate {
+            background: #cce5ff;
+            color: #004085;
+        }
+        
+        .level-advanced {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .lib-card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 15px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border: 1px solid var(--light-bg);
+        }
+        
+        .lib-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .lib-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .lib-title {
+            color: var(--secondary-color);
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+        
+        .lib-badge {
+            background: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        
+        .tooltip-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 20px;
+            font-size: 12px;
+            margin-left: 5px;
+            cursor: help;
+        }
+        
+        .quiz-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+        
+        .quiz-question {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        
+        .quiz-options {
+            margin: 15px 0;
+        }
+        
+        .quiz-option {
+            background: rgba(255,255,255,0.1);
+            padding: 12px 20px;
+            margin: 8px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .quiz-option:hover {
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .quiz-option.correct {
+            background: #28a745;
+        }
+        
+        .quiz-option.wrong {
+            background: #dc3545;
+        }
+        
+        .practical-example {
+            background: #e7f5ff;
+            border-left: 4px solid #339af0;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Indicator -->
+    <div class="progress-indicator">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <div class="logo">
+            <h2><i class="fab fa-react"></i> React Mastery</h2>
+            <p class="text-muted">Complete Guide 2024</p>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <div class="nav flex-column" id="sidebarNav">
+                <a class="nav-link active" href="#introduction"><i class="fas fa-home"></i> Introduction</a>
+                <a class="nav-link" href="#fundamentals"><i class="fas fa-cube"></i> Core Fundamentals</a>
+                <a class="nav-link" href="#hooks"><i class="fas fa-anchor"></i> React Hooks</a>
+                <a class="nav-link" href="#advanced"><i class="fas fa-rocket"></i> Advanced Concepts</a>
+                <a class="nav-link" href="#routing"><i class="fas fa-route"></i> Routing & Navigation</a>
+                <a class="nav-link" href="#state-management"><i class="fas fa-database"></i> State Management</a>
+                <a class="nav-link" href="#ui-frameworks"><i class="fas fa-palette"></i> UI Frameworks</a>
+                <a class="nav-link" href="#apis"><i class="fas fa-server"></i> API Integration</a>
+                <a class="nav-link" href="#performance"><i class="fas fa-tachometer-alt"></i> Performance</a>
+                <a class="nav-link" href="#testing"><i class="fas fa-vial"></i> Testing</a>
+                <a class="nav-link" href="#deployment"><i class="fas fa-cloud-upload-alt"></i> Deployment</a>
+                <a class="nav-link" href="#best-practices"><i class="fas fa-graduation-cap"></i> Best Practices</a>
+                <a class="nav-link" href="#resources"><i class="fas fa-book"></i> Resources</a>
+            </div>
+        </nav>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        
+        <!-- Introduction Chapter -->
+        <div class="chapter" id="introduction">
+            <h1>Complete React.js Mastery Guide</h1>
+            <p class="lead">Learn React from absolute beginner to professional level with this comprehensive guide covering everything from fundamentals to advanced patterns.</p>
+            
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="concept-card">
+                        <h4><i class="fas fa-bullseye"></i> What is React?</h4>
+                        <p>React is a <strong>JavaScript library</strong> for building user interfaces, created by Facebook. It follows a component-based architecture and uses a virtual DOM for efficient updates.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="concept-card">
+                        <h4><i class="fas fa-star"></i> Why Learn React?</h4>
+                        <ul>
+                            <li>Most popular frontend library</li>
+                            <li>High demand in job market</li>
+                            <li>Reusable components</li>
+                            <li>Great performance with Virtual DOM</li>
+                            <li>Strong community and ecosystem</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="important-note">
+                <h5><i class="fas fa-lightbulb"></i> Prerequisites</h5>
+                <p>Before learning React, you should be comfortable with:</p>
+                <ul>
+                    <li>HTML & CSS fundamentals</li>
+                    <li>JavaScript (ES6+) including:
+                        <ul>
+                            <li>Arrow functions</li>
+                            <li>Destructuring</li>
+                            <li>Spread/Rest operators</li>
+                            <li>Promises & Async/Await</li>
+                            <li>Modules (import/export)</li>
+                        </ul>
+                    </li>
+                    <li>Basic understanding of npm/yarn</li>
+                </ul>
+            </div>
+            
+            <h3>Quick Setup</h3>
+            <p>Create a new React app using Create React App:</p>
+            <div class="code-block">
+                <code>
+                    <span class="code-comment"># Using npm</span><br>
+                    npx create-react-app my-app<br>
+                    cd my-app<br>
+                    npm start<br><br>
+                    
+                    <span class="code-comment"># Using yarn</span><br>
+                    yarn create react-app my-app<br>
+                    cd my-app<br>
+                    yarn start
+                </code>
+            </div>
+            
+            <div class="practical-example">
+                <h5><i class="fas fa-code"></i> Your First React Component</h5>
+                <div class="code-block">
+                    <code>
+                        <span class="code-keyword">import</span> React <span class="code-keyword">from</span> <span class="code-string">'react'</span>;<br>
+                        <span class="code-keyword">import</span> <span class="code-string">'./App.css'</span>;<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">App</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div className=<span class="code-string">"App"</span>&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Hello, React!&lt;/h1&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Welcome to React world&lt;/p&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }<br><br>
+                        
+                        <span class="code-keyword">export default</span> App;
+                    </code>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Fundamentals Chapter -->
+        <div class="chapter" id="fundamentals">
+            <h2><i class="fas fa-cube"></i> Core Fundamentals</h2>
+            
+            <div class="concept-card">
+                <h4>1. JSX (JavaScript XML)</h4>
+                <p>JSX is a syntax extension that allows writing HTML-like code in JavaScript.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// JSX Example</span><br>
+                        <span class="code-keyword">const</span> element = &lt;h1&gt;Hello, world!&lt;/h1&gt;;<br><br>
+                        
+                        <span class="code-comment">// Embedding Expressions</span><br>
+                        <span class="code-keyword">const</span> name = <span class="code-string">'John'</span>;<br>
+                        <span class="code-keyword">const</span> element = &lt;h1&gt;Hello, {name}&lt;/h1&gt;;<br><br>
+                        
+                        <span class="code-comment">// JSX is an expression too</span><br>
+                        <span class="code-keyword">function</span> <span class="code-function">getGreeting</span>(user) {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">if</span> (user) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> &lt;h1&gt;Hello, {user.name}!&lt;/h1&gt;;<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> &lt;h1&gt;Hello, Stranger.&lt;/h1&gt;;<br>
+                        }
+                    </code>
+                </div>
+                
+                <div class="important-note">
+                    <h5><i class="fas fa-exclamation-circle"></i> Important JSX Rules</h5>
+                    <ul>
+                        <li>Use className instead of class</li>
+                        <li>Use htmlFor instead of for</li>
+                        <li>Always close tags ( &lt;br/&gt;, &lt;img/&gt; )</li>
+                        <li>Use camelCase for attributes (onClick, tabIndex)</li>
+                        <li>Only one root element per component</li>
+                        <li>Use fragments (<>...</>) for multiple elements</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>2. Components</h4>
+                <p>Components are reusable, independent pieces of UI. Two types:</p>
+                
+                <div class="comparison-table">
+                    <div class="comparison-card">
+                        <h4>Function Components</h4>
+                        <div class="code-block">
+                            <code>
+                                <span class="code-keyword">function</span> <span class="code-function">Welcome</span>(props) {<br>
+                                &nbsp;&nbsp;<span class="code-keyword">return</span> &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;<br>
+                                }<br><br>
+                                
+                                <span class="code-comment">// Arrow function style</span><br>
+                                <span class="code-keyword">const</span> Welcome = (props) => {<br>
+                                &nbsp;&nbsp;<span class="code-keyword">return</span> &lt;h1&gt;Hello, {props.name}&lt;/h1&gt;;<br>
+                                };
+                            </code>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-card">
+                        <h4>Class Components</h4>
+                        <div class="code-block">
+                            <code>
+                                <span class="code-keyword">class</span> Welcome <span class="code-keyword">extends</span> React.Component {<br>
+                                &nbsp;&nbsp;<span class="code-function">render</span>() {<br>
+                                &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> &lt;h1&gt;Hello, {<span class="code-keyword">this</span>.props.name}&lt;/h1&gt;;<br>
+                                &nbsp;&nbsp;}<br>
+                                }
+                            </code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="best-practice">
+                    <h5><i class="fas fa-check-circle"></i> Best Practice</h5>
+                    <p>Use function components with hooks for new projects. Class components are mostly used in legacy code.</p>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>3. Props (Properties)</h4>
+                <p>Props are read-only data passed from parent to child components.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Parent Component</span><br>
+                        <span class="code-keyword">function</span> <span class="code-function">App</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;Welcome name=<span class="code-string">"John"</span> age={25} /&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }<br><br>
+                        
+                        <span class="code-comment">// Child Component</span><br>
+                        <span class="code-keyword">function</span> <span class="code-function">Welcome</span>(props) {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Hello, {props.name}&lt;/h1&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Age: {props.age}&lt;/p&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }<br><br>
+                        
+                        <span class="code-comment">// Destructuring props</span><br>
+                        <span class="code-keyword">function</span> <span class="code-function">Welcome</span>({ name, age }) {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> &lt;h1&gt;Hello, {name}&lt;/h1&gt;;<br>
+                        }
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>4. State</h4>
+                <p>State is mutable data that belongs to a component and triggers re-renders when changed.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Class Component State</span><br>
+                        <span class="code-keyword">class</span> Counter <span class="code-keyword">extends</span> React.Component {<br>
+                        &nbsp;&nbsp;<span class="code-function">constructor</span>(props) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">super</span>(props);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">this</span>.state = {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;count: 0<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;};<br>
+                        &nbsp;&nbsp;}<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-function">increment</span> = () => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">this</span>.<span class="code-function">setState</span>({ count: <span class="code-keyword">this</span>.state.count + 1 });<br>
+                        &nbsp;&nbsp;}<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-function">render</span>() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Count: {<span class="code-keyword">this</span>.state.count}&lt;/p&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={<span class="code-keyword">this</span>.increment}&gt;Increment&lt;/button&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;);<br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </code>
+                </div>
+                
+                <div class="important-note">
+                    <h5><i class="fas fa-exclamation-circle"></i> State Rules</h5>
+                    <ul>
+                        <li>Never modify state directly (use setState or useState setter)</li>
+                        <li>State updates are asynchronous</li>
+                        <li>State updates are merged (class components) or replaced (function components)</li>
+                        <li>Lift state up to the closest common ancestor when sharing between components</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>5. Lifecycle Methods <span class="level-badge level-intermediate">Class Components</span></h4>
+                
+                <div class="diagram">
+                    <p><strong>Component Lifecycle Diagram</strong></p>
+                    <p>Mounting → Updating → Unmounting</p>
+                </div>
+                
+                <table class="table table-custom">
+                    <thead>
+                        <tr>
+                            <th>Phase</th>
+                            <th>Method</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Mounting</td>
+                            <td>constructor()</td>
+                            <td>Initialize state, bind methods</td>
+                        </tr>
+                        <tr>
+                            <td>Mounting</td>
+                            <td>render()</td>
+                            <td>Returns JSX to render</td>
+                        </tr>
+                        <tr>
+                            <td>Mounting</td>
+                            <td>componentDidMount()</td>
+                            <td>DOM operations, API calls</td>
+                        </tr>
+                        <tr>
+                            <td>Updating</td>
+                            <td>shouldComponentUpdate()</td>
+                            <td>Optimize rendering</td>
+                        </tr>
+                        <tr>
+                            <td>Updating</td>
+                            <td>render()</td>
+                            <td>Re-render with new props/state</td>
+                        </tr>
+                        <tr>
+                            <td>Updating</td>
+                            <td>componentDidUpdate()</td>
+                            <td>DOM updates after render</td>
+                        </tr>
+                        <tr>
+                            <td>Unmounting</td>
+                            <td>componentWillUnmount()</td>
+                            <td>Cleanup (timers, listeners)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="quiz-box">
+                <div class="quiz-question">
+                    <h5><i class="fas fa-question-circle"></i> Quick Quiz: Fundamentals</h5>
+                    <p>What is the main difference between props and state?</p>
+                </div>
+                <div class="quiz-options">
+                    <div class="quiz-option" onclick="showAnswer(this, 'correct')">Props are read-only, State is mutable</div>
+                    <div class="quiz-option" onclick="showAnswer(this, 'wrong')">Props are mutable, State is read-only</div>
+                    <div class="quiz-option" onclick="showAnswer(this, 'wrong')">Both are mutable</div>
+                    <div class="quiz-option" onclick="showAnswer(this, 'wrong')">Both are read-only</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Hooks Chapter -->
+        <div class="chapter" id="hooks">
+            <h2><i class="fas fa-anchor"></i> React Hooks</h2>
+            <p>Hooks let you use state and other React features in function components.</p>
+            
+            <div class="concept-card">
+                <h4>1. useState Hook <span class="level-badge level-beginner">Basic</span></h4>
+                <p>Adds state to function components.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-keyword">import</span> React, { useState } <span class="code-keyword">from</span> <span class="code-string">'react'</span>;<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">Counter</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-comment">// Declare state variable</span><br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> [count, setCount] = <span class="code-function">useState</span>(0);<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> [user, setUser] = <span class="code-function">useState</span>({ name: <span class="code-string">''</span>, age: 0 });<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;You clicked {count} times&lt;/p&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() => <span class="code-function">setCount</span>(count + 1)}&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click me<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/button&gt;<br><br>
+                        
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">&lt;!-- Update object state --&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() => <span class="code-function">setUser</span>({...user, age: user.age + 1})}&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Increase Age<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/button&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </code>
+                </div>
+                
+                <div class="important-note">
+                    <h5><i class="fas fa-exclamation-circle"></i> useState Tips</h5>
+                    <ul>
+                        <li>Use functional updates when new state depends on previous state: <code>setCount(prev => prev + 1)</code></li>
+                        <li>Initialize with a function for expensive computations: <code>useState(() => expensiveComputation())</code></li>
+                        <li>Multiple state variables are fine - don't feel forced to combine them</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>2. useEffect Hook <span class="level-badge level-intermediate">Essential</span></h4>
+                <p>Handles side effects in function components.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-keyword">import</span> React, { useState, useEffect } <span class="code-keyword">from</span> <span class="code-string">'react'</span>;<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">Example</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> [count, setCount] = <span class="code-function">useState</span>(0);<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-comment">// Similar to componentDidMount + componentDidUpdate</span><br>
+                        &nbsp;&nbsp;<span class="code-function">useEffect</span>(() => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// Update document title</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;document.title = <span class="code-string">`You clicked </span>${count}<span class="code-string"> times`</span>;<br>
+                        &nbsp;&nbsp;});<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-comment">// Runs only on mount (empty dependency array)</span><br>
+                        &nbsp;&nbsp;<span class="code-function">useEffect</span>(() => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="code-function">log</span>(<span class="code-string">'Component mounted'</span>);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// Cleanup function (runs on unmount)</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> () => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.<span class="code-function">log</span>(<span class="code-string">'Component will unmount'</span>);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;};<br>
+                        &nbsp;&nbsp;}, []);<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-comment">// Runs when count changes</span><br>
+                        &nbsp;&nbsp;<span class="code-function">useEffect</span>(() => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="code-function">log</span>(<span class="code-string">`Count changed to: </span>${count}<span class="code-string">`</span>);<br>
+                        &nbsp;&nbsp;}, [count]);<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;You clicked {count} times&lt;/p&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() => <span class="code-function">setCount</span>(count + 1)}&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Click me<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/button&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </code>
+                </div>
+                
+                <div class="best-practice">
+                    <h5><i class="fas fa-check-circle"></i> useEffect Best Practices</h5>
+                    <ul>
+                        <li>Always specify dependency array</li>
+                        <li>Clean up subscriptions, timers, and event listeners</li>
+                        <li>Separate concerns into multiple effects</li>
+                        <li>Use <code>useEffect</code> for side effects, not for data transformation</li>
+                        <li>Consider using <code>useLayoutEffect</code> for DOM measurements</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>3. useContext Hook <span class="level-badge level-intermediate">Advanced</span></h4>
+                <p>Access context values without nesting.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// 1. Create Context</span><br>
+                        <span class="code-keyword">const</span> ThemeContext = React.<span class="code-function">createContext</span>(<span class="code-string">'light'</span>);<br><br>
+                        
+                        <span class="code-comment">// 2. Provide Context</span><br>
+                        <span class="code-keyword">function</span> <span class="code-function">App</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;ThemeContext.Provider value=<span class="code-string">"dark"</span>&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Toolbar /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/ThemeContext.Provider&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }<br><br>
+                        
+                        <span class="code-comment">// 3. Consume Context</span><br>
+                        <span class="code-keyword">function</span> <span class="code-function">Toolbar</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> theme = <span class="code-function">useContext</span>(ThemeContext);<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> &lt;div className={`button-${theme}`}&gt;Theme: {theme}&lt;/div&gt;;<br>
+                        }
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>4. useRef Hook <span class="level-badge level-intermediate">Essential</span></h4>
+                <p>Creates a mutable reference that persists across renders.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-keyword">import</span> React, { useRef, useEffect } <span class="code-keyword">from</span> <span class="code-string">'react'</span>;<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">TextInput</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-comment">// Create ref</span><br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> inputRef = <span class="code-function">useRef</span>(null);<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> renderCount = <span class="code-function">useRef</span>(1);<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-function">useEffect</span>(() => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// Focus input on mount</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;inputRef.current.<span class="code-function">focus</span>();<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// Track render count</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;renderCount.current += 1;<br>
+                        &nbsp;&nbsp;});<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;input ref={inputRef} type=<span class="code-string">"text"</span> /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;Renders: {renderCount.current}&lt;/p&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </code>
+                </div>
+                
+                <div class="important-note">
+                    <h5><i class="fas fa-exclamation-circle"></i> useRef vs useState</h5>
+                    <p><strong>useRef:</strong> Changes don't trigger re-renders. Good for DOM references, timers, previous values.</p>
+                    <p><strong>useState:</strong> Changes trigger re-renders. Good for data that affects UI.</p>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>5. useReducer Hook <span class="level-badge level-intermediate">Advanced</span></h4>
+                <p>Alternative to useState for complex state logic.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-keyword">const</span> initialState = { count: 0 };<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">reducer</span>(state, action) {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">switch</span> (action.type) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">case</span> <span class="code-string">'increment'</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> { count: state.count + 1 };<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">case</span> <span class="code-string">'decrement'</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> { count: state.count - 1 };<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">case</span> <span class="code-string">'reset'</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> initialState;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">default</span>:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">throw new</span> <span class="code-function">Error</span>();<br>
+                        &nbsp;&nbsp;}<br>
+                        }<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">Counter</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> [state, dispatch] = <span class="code-function">useReducer</span>(reducer, initialState);<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Count: {state.count}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() => <span class="code-function">dispatch</span>({ type: <span class="code-string">'increment'</span> })}&gt;+&lt;/button&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() => <span class="code-function">dispatch</span>({ type: <span class="code-string">'decrement'</span> })}&gt;-&lt;/button&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() => <span class="code-function">dispatch</span>({ type: <span class="code-string">'reset'</span> })}&gt;Reset&lt;/button&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>6. Custom Hooks <span class="level-badge level-advanced">Advanced</span></h4>
+                <p>Extract component logic into reusable functions.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Custom hook: useLocalStorage</span><br>
+                        <span class="code-keyword">function</span> <span class="code-function">useLocalStorage</span>(key, initialValue) {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> [storedValue, setStoredValue] = <span class="code-function">useState</span>(() => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">try</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> item = window.localStorage.<span class="code-function">getItem</span>(key);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> item ? JSON.<span class="code-function">parse</span>(item) : initialValue;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;} <span class="code-keyword">catch</span> (error) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> initialValue;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;});<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> setValue = (value) => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">try</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> valueToStore =<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value <span class="code-keyword">instanceof</span> Function ? <span class="code-function">value</span>(storedValue) : value;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">setStoredValue</span>(valueToStore);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;window.localStorage.<span class="code-function">setItem</span>(key, JSON.<span class="code-function">stringify</span>(valueToStore));<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;} <span class="code-keyword">catch</span> (error) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;console.<span class="code-function">log</span>(error);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;};<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> [storedValue, setValue];<br>
+                        }<br><br>
+                        
+                        <span class="code-comment">// Using the custom hook</span><br>
+                        <span class="code-keyword">function</span> <span class="code-function">Component</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> [name, setName] = <span class="code-function">useLocalStorage</span>(<span class="code-string">'name'</span>, <span class="code-string">'John'</span>);<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;input<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value={name}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onChange={e => <span class="code-function">setName</span>(e.target.value)}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;/&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </code>
+                </div>
+            </div>
+            
+            <div class="comparison-table">
+                <div class="comparison-card">
+                    <h4>Built-in Hooks Summary</h4>
+                    <table class="table">
+                        <tr>
+                            <th>Hook</th>
+                            <th>Purpose</th>
+                        </tr>
+                        <tr>
+                            <td>useState</td>
+                            <td>State management</td>
+                        </tr>
+                        <tr>
+                            <td>useEffect</td>
+                            <td>Side effects</td>
+                        </tr>
+                        <tr>
+                            <td>useContext</td>
+                            <td>Context consumption</td>
+                        </tr>
+                        <tr>
+                            <td>useReducer</td>
+                            <td>Complex state logic</td>
+                        </tr>
+                        <tr>
+                            <td>useCallback</td>
+                            <td>Memoize functions</td>
+                        </tr>
+                        <tr>
+                            <td>useMemo</td>
+                            <td>Memoize values</td>
+                        </tr>
+                        <tr>
+                            <td>useRef</td>
+                            <td>DOM refs, mutable values</td>
+                        </tr>
+                        <tr>
+                            <td>useLayoutEffect</td>
+                            <td>Sync layout effects</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="comparison-card">
+                    <h4>Additional Hooks</h4>
+                    <table class="table">
+                        <tr>
+                            <th>Hook</th>
+                            <th>Purpose</th>
+                        </tr>
+                        <tr>
+                            <td>useImperativeHandle</td>
+                            <td>Customize ref exposure</td>
+                        </tr>
+                        <tr>
+                            <td>useDebugValue</td>
+                            <td>Debug custom hooks</td>
+                        </tr>
+                        <tr>
+                            <td>useDeferredValue</td>
+                            <td>Defer rendering</td>
+                        </tr>
+                        <tr>
+                            <td>useTransition</td>
+                            <td>Mark non-urgent updates</td>
+                        </tr>
+                        <tr>
+                            <td>useId</td>
+                            <td>Generate unique IDs</td>
+                        </tr>
+                        <tr>
+                            <td>useSyncExternalStore</td>
+                            <td>Subscribe to external stores</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Advanced Concepts Chapter -->
+        <div class="chapter" id="advanced">
+            <h2><i class="fas fa-rocket"></i> Advanced Concepts</h2>
+            
+            <div class="concept-card">
+                <h4>1. Higher-Order Components (HOC)</h4>
+                <p>A pattern where a function takes a component and returns a new component.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// HOC: withAuthentication</span><br>
+                        <span class="code-keyword">const</span> withAuthentication = (WrappedComponent) => {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-function">function</span> (props) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> [isAuthenticated, setIsAuthenticated] = <span class="code-function">useState</span>(false);<br><br>
+                        
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> (!isAuthenticated) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> &lt;Login onLogin={() => <span class="code-function">setIsAuthenticated</span>(true)} /&gt;;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                        
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> &lt;WrappedComponent {...props} /&gt;;<br>
+                        &nbsp;&nbsp;};<br>
+                        };<br><br>
+                        
+                        <span class="code-comment">// Usage</span><br>
+                        <span class="code-keyword">const</span> Dashboard = () => &lt;div&gt;Dashboard Content&lt;/div&gt;;<br>
+                        <span class="code-keyword">const</span> AuthenticatedDashboard = <span class="code-function">withAuthentication</span>(Dashboard);
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>2. Render Props Pattern</h4>
+                <p>A component prop that is a function returning React elements.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-keyword">function</span> <span class="code-function">MouseTracker</span>(props) {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> [position, setPosition] = <span class="code-function">useState</span>({ x: 0, y: 0 });<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> handleMouseMove = (event) => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">setPosition</span>({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x: event.clientX,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y: event.clientY<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;});<br>
+                        &nbsp;&nbsp;};<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div style={{ height: <span class="code-string">'100vh'</span> }} onMouseMove={handleMouseMove}&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<span class="code-function">props</span>.<span class="code-function">render</span>(position)}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }<br><br>
+                        
+                        <span class="code-comment">// Usage</span><br>
+                        &lt;MouseTracker<br>
+                        &nbsp;&nbsp;render={position => (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;Mouse position&lt;/h1&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;X: {position.x}, Y: {position.y}&lt;/p&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/&gt;<br>
+                        &nbsp;&nbsp;)}<br>
+                        /&gt;
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>3. React.memo</h4>
+                <p>Performance optimization - memoizes component to prevent unnecessary re-renders.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-keyword">const</span> ExpensiveComponent = React.<span class="code-function">memo</span>(<span class="code-function">function</span> ExpensiveComponent(props) {<br>
+                        &nbsp;&nbsp;<span class="code-comment">// Only re-renders if props change</span><br>
+                        &nbsp;&nbsp;console.<span class="code-function">log</span>(<span class="code-string">'Expensive render'</span>);<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> &lt;div&gt;{props.value}&lt;/div&gt;;<br>
+                        });<br><br>
+                        
+                        <span class="code-comment">// Custom comparison function</span><br>
+                        <span class="code-keyword">const</span> areEqual = (prevProps, nextProps) => {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> prevProps.value === nextProps.value;<br>
+                        };<br><br>
+                        
+                        <span class="code-keyword">const</span> CustomMemoComponent = React.<span class="code-function">memo</span>(ExpensiveComponent, areEqual);
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>4. Code Splitting & Lazy Loading</h4>
+                <p>Load components only when needed to improve performance.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-keyword">import</span> React, { Suspense, lazy } <span class="code-keyword">from</span> <span class="code-string">'react'</span>;<br><br>
+                        
+                        <span class="code-comment">// Lazy load component</span><br>
+                        <span class="code-keyword">const</span> LazyComponent = <span class="code-function">lazy</span>(() => <span class="code-function">import</span>(<span class="code-string">'./LazyComponent'</span>));<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">App</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Suspense fallback={<span class="code-string">&lt;div&gt;Loading...&lt;/div&gt;</span>}&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;LazyComponent /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Suspense&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }<br><br>
+                        
+                        <span class="code-comment">// Route-based code splitting (with React Router)</span><br>
+                        <span class="code-keyword">const</span> Home = <span class="code-function">lazy</span>(() => <span class="code-function">import</span>(<span class="code-string">'./routes/Home'</span>));<br>
+                        <span class="code-keyword">const</span> About = <span class="code-function">lazy</span>(() => <span class="code-function">import</span>(<span class="code-string">'./routes/About'</span>));
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>5. Error Boundaries</h4>
+                <p>React components that catch JavaScript errors anywhere in their child component tree.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-keyword">class</span> ErrorBoundary <span class="code-keyword">extends</span> React.Component {<br>
+                        &nbsp;&nbsp;<span class="code-function">constructor</span>(props) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">super</span>(props);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">this</span>.state = { hasError: false };<br>
+                        &nbsp;&nbsp;}<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">static</span> <span class="code-function">getDerivedStateFromError</span>(error) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> { hasError: true };<br>
+                        &nbsp;&nbsp;}<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-function">componentDidCatch</span>(error, errorInfo) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// Log to error reporting service</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="code-function">log</span>(<span class="code-string">'Error:'</span>, error, errorInfo);<br>
+                        &nbsp;&nbsp;}<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-function">render</span>() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> (<span class="code-keyword">this</span>.state.hasError) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> &lt;h1&gt;Something went wrong.&lt;/h1&gt;;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> <span class="code-keyword">this</span>.props.children;<br>
+                        &nbsp;&nbsp;}<br>
+                        }<br><br>
+                        
+                        <span class="code-comment">// Usage</span><br>
+                        &lt;ErrorBoundary&gt;<br>
+                        &nbsp;&nbsp;&lt;MyComponent /&gt;<br>
+                        &lt;/ErrorBoundary&gt;
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>6. Portals</h4>
+                <p>Render children into a DOM node that exists outside the parent component's DOM hierarchy.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-keyword">function</span> <span class="code-function">Modal</span>({ children }) {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> modalRoot = document.<span class="code-function">getElementById</span>(<span class="code-string">'modal-root'</span>);<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> ReactDOM.<span class="code-function">createPortal</span>(<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div className=<span class="code-string">"modal"</span>&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{children}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;modalRoot<br>
+                        &nbsp;&nbsp;);<br>
+                        }<br><br>
+                        
+                        <span class="code-comment">// HTML</span><br>
+                        &lt;div id=<span class="code-string">"root"</span>&gt;&lt;/div&gt;<br>
+                        &lt;div id=<span class="code-string">"modal-root"</span>&gt;&lt;/div&gt;
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>7. Forwarding Refs</h4>
+                <p>Pass ref through a component to one of its children.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Forward ref to input element</span><br>
+                        <span class="code-keyword">const</span> FancyInput = React.<span class="code-function">forwardRef</span>((props, ref) => (<br>
+                        &nbsp;&nbsp;&lt;input ref={ref} className=<span class="code-string">"fancy-input"</span> {...props} /&gt;<br>
+                        ));<br><br>
+                        
+                        <span class="code-comment">// Parent component</span><br>
+                        <span class="code-keyword">function</span> <span class="code-function">App</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> inputRef = <span class="code-function">useRef</span>(null);<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-function">useEffect</span>(() => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;inputRef.current.<span class="code-function">focus</span>();<br>
+                        &nbsp;&nbsp;}, []);<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> &lt;FancyInput ref={inputRef} /&gt;;<br>
+                        }
+                    </code>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Routing & Navigation Chapter -->
+        <div class="chapter" id="routing">
+            <h2><i class="fas fa-route"></i> Routing & Navigation</h2>
+            
+            <div class="concept-card">
+                <h4>React Router (v6)</h4>
+                <p>The most popular routing library for React.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Installation</span><br>
+                        npm install react-router-dom<br><br>
+                        
+                        <span class="code-comment">// Basic setup</span><br>
+                        <span class="code-keyword">import</span> { BrowserRouter, Routes, Route, Link } <span class="code-keyword">from</span> <span class="code-string">'react-router-dom'</span>;<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">App</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;BrowserRouter&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;nav&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Link to=<span class="code-string">"/"</span>&gt;Home&lt;/Link&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Link to=<span class="code-string">"/about"</span>&gt;About&lt;/Link&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Link to=<span class="code-string">"/users"</span>&gt;Users&lt;/Link&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/nav&gt;<br><br>
+                        
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Routes&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Route path=<span class="code-string">"/"</span> element={<span class="code-string">&lt;Home /&gt;</span>} /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Route path=<span class="code-string">"/about"</span> element={<span class="code-string">&lt;About /&gt;</span>} /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Route path=<span class="code-string">"/users"</span> element={<span class="code-string">&lt;Users /&gt;</span>} /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Route path=<span class="code-string">"/users/:id"</span> element={<span class="code-string">&lt;UserDetail /&gt;</span>} /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Route path=<span class="code-string">"*"</span> element={<span class="code-string">&lt;NotFound /&gt;</span>} /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Routes&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/BrowserRouter&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </code>
+                </div>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Accessing route parameters</span><br>
+                        <span class="code-keyword">import</span> { useParams } <span class="code-keyword">from</span> <span class="code-string">'react-router-dom'</span>;<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">UserDetail</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> { id } = <span class="code-function">useParams</span>();<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> &lt;h2&gt;User ID: {id}&lt;/h2&gt;;<br>
+                        }<br><br>
+                        
+                        <span class="code-comment">// Navigation</span><br>
+                        <span class="code-keyword">import</span> { useNavigate } <span class="code-keyword">from</span> <span class="code-string">'react-router-dom'</span>;<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">Home</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> navigate = <span class="code-function">useNavigate</span>();<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() => <span class="code-function">navigate</span>(<span class="code-string">'/about'</span>)}&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Go to About<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/button&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </code>
+                </div>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Nested Routes</span><br>
+                        &lt;Routes&gt;<br>
+                        &nbsp;&nbsp;&lt;Route path=<span class="code-string">"/dashboard"</span> element={<span class="code-string">&lt;Dashboard /&gt;</span>}&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;Route path=<span class="code-string">"profile"</span> element={<span class="code-string">&lt;Profile /&gt;</span>} /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;Route path=<span class="code-string">"settings"</span> element={<span class="code-string">&lt;Settings /&gt;</span>} /&gt;<br>
+                        &nbsp;&nbsp;&lt;/Route&gt;<br>
+                        &lt;/Routes&gt;<br><br>
+                        
+                        <span class="code-comment">// In Dashboard component:</span><br>
+                        <span class="code-keyword">import</span> { Outlet } <span class="code-keyword">from</span> <span class="code-string">'react-router-dom'</span>;<br><br>
+                        <span class="code-keyword">function</span> <span class="code-function">Dashboard</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;Dashboard&lt;/h2&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Outlet /&gt; <span class="code-comment">&lt;!-- Renders nested routes --&gt;</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Protected Routes (Authentication)</h4>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-keyword">function</span> <span class="code-function">ProtectedRoute</span>({ children }) {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> { user } = <span class="code-function">useAuth</span>(); <span class="code-comment">// Custom auth hook</span><br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> location = <span class="code-function">useLocation</span>();<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">if</span> (!user) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> &lt;Navigate to=<span class="code-string">"/login"</span> state={{ from: location }} replace /&gt;;<br>
+                        &nbsp;&nbsp;}<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> children;<br>
+                        }<br><br>
+                        
+                        <span class="code-comment">// Usage</span><br>
+                        &lt;Route<br>
+                        &nbsp;&nbsp;path=<span class="code-string">"/dashboard"</span><br>
+                        &nbsp;&nbsp;element={<span class="code-string">&lt;ProtectedRoute&gt;&lt;Dashboard /&gt;&lt;/ProtectedRoute&gt;</span>}<br>
+                        /&gt;
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Alternative Routing Libraries</h4>
+                
+                <div class="comparison-table">
+                    <div class="comparison-card">
+                        <h5>Next.js Router</h5>
+                        <p>File-based routing with built-in support</p>
+                        <code>pages/about.js → /about</code>
+                    </div>
+                    
+                    <div class="comparison-card">
+                        <h5>TanStack Router</h5>
+                        <p>Type-safe, performant routing</p>
+                        <code>Fully typed with TypeScript</code>
+                    </div>
+                    
+                    <div class="comparison-card">
+                        <h5>Wouter</h5>
+                        <p>Lightweight alternative</p>
+                        <code>~1.7KB min+gzip</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- State Management Chapter -->
+        <div class="chapter" id="state-management">
+            <h2><i class="fas fa-database"></i> State Management</h2>
+            
+            <div class="concept-card">
+                <h4>1. Context API (Built-in)</h4>
+                <p>For global state without external libraries.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Create Context</span><br>
+                        <span class="code-keyword">const</span> ThemeContext = React.<span class="code-function">createContext</span>();<br><br>
+                        
+                        <span class="code-comment">// Provider Component</span><br>
+                        <span class="code-keyword">function</span> <span class="code-function">ThemeProvider</span>({ children }) {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> [theme, setTheme] = <span class="code-function">useState</span>(<span class="code-string">'light'</span>);<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> toggleTheme = () => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">setTheme</span>(prev => prev === <span class="code-string">'light'</span> ? <span class="code-string">'dark'</span> : <span class="code-string">'light'</span>);<br>
+                        &nbsp;&nbsp;};<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;ThemeContext.Provider value={{ theme, toggleTheme }}&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{children}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/ThemeContext.Provider&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }<br><br>
+                        
+                        <span class="code-comment">// Custom Hook</span><br>
+                        <span class="code-keyword">export</span> <span class="code-keyword">function</span> <span class="code-function">useTheme</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> context = <span class="code-function">useContext</span>(ThemeContext);<br>
+                        &nbsp;&nbsp;<span class="code-keyword">if</span> (!context) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">throw new</span> <span class="code-function">Error</span>(<span class="code-string">'useTheme must be used within ThemeProvider'</span>);<br>
+                        &nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> context;<br>
+                        }<br><br>
+                        
+                        <span class="code-comment">// Usage</span><br>
+                        <span class="code-keyword">function</span> <span class="code-function">App</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;ThemeProvider&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Header /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Main /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/ThemeProvider&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">Header</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> { theme, toggleTheme } = <span class="code-function">useTheme</span>();<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={toggleTheme}&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Switch to {theme === <span class="code-string">'light'</span> ? <span class="code-string">'Dark'</span> : <span class="code-string">'Light'</span>} Mode<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/button&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </code>
+                </div>
+            </div>
+            
+            <div class="lib-card">
+                <div class="lib-header">
+                    <div class="lib-title">Redux Toolkit (RTK)</div>
+                    <div class="lib-badge">Popular</div>
+                </div>
+                <p>Official, opinionated toolset for efficient Redux development.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Installation</span><br>
+                        npm install @reduxjs/toolkit react-redux<br><br>
+                        
+                        <span class="code-comment">// Store setup</span><br>
+                        <span class="code-keyword">import</span> { configureStore, createSlice } <span class="code-keyword">from</span> <span class="code-string">'@reduxjs/toolkit'</span>;<br><br>
+                        
+                        <span class="code-keyword">const</span> counterSlice = <span class="code-function">createSlice</span>({<br>
+                        &nbsp;&nbsp;name: <span class="code-string">'counter'</span>,<br>
+                        &nbsp;&nbsp;initialState: { value: 0 },<br>
+                        &nbsp;&nbsp;reducers: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;increment: (state) => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state.value += 1;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;decrement: (state) => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;state.value -= 1;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;},<br>
+                        &nbsp;&nbsp;},<br>
+                        });<br><br>
+                        
+                        <span class="code-keyword">export const</span> { increment, decrement } = counterSlice.actions;<br><br>
+                        
+                        <span class="code-keyword">const</span> store = <span class="code-function">configureStore</span>({<br>
+                        &nbsp;&nbsp;reducer: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;counter: counterSlice.reducer,<br>
+                        &nbsp;&nbsp;},<br>
+                        });<br><br>
+                        
+                        <span class="code-comment">// In App</span><br>
+                        <span class="code-keyword">import</span> { Provider } <span class="code-keyword">from</span> <span class="code-string">'react-redux'</span>;<br>
+                        <span class="code-keyword">import</span> { useSelector, useDispatch } <span class="code-keyword">from</span> <span class="code-string">'react-redux'</span>;<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">Counter</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> count = <span class="code-function">useSelector</span>((state) => state.counter.value);<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> dispatch = <span class="code-function">useDispatch</span>();<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() => <span class="code-function">dispatch</span>(<span class="code-function">increment</span>())}&gt;+&lt;/button&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;span&gt;{count}&lt;/span&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() => <span class="code-function">dispatch</span>(<span class="code-function">decrement</span>())}&gt;-&lt;/button&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </code>
+                </div>
+            </div>
+            
+            <div class="lib-card">
+                <div class="lib-header">
+                    <div class="lib-title">Zustand</div>
+                    <div class="lib-badge">Lightweight</div>
+                </div>
+                <p>Small, fast, and scalable state management solution.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Installation</span><br>
+                        npm install zustand<br><br>
+                        
+                        <span class="code-comment">// Store creation</span><br>
+                        <span class="code-keyword">import</span> create <span class="code-keyword">from</span> <span class="code-string">'zustand'</span>;<br><br>
+                        
+                        <span class="code-keyword">const</span> useStore = <span class="code-function">create</span>((set) => ({<br>
+                        &nbsp;&nbsp;count: 0,<br>
+                        &nbsp;&nbsp;increase: () => <span class="code-function">set</span>((state) => ({ count: state.count + 1 })),<br>
+                        &nbsp;&nbsp;decrease: () => <span class="code-function">set</span>((state) => ({ count: state.count - 1 })),<br>
+                        &nbsp;&nbsp;reset: () => <span class="code-function">set</span>({ count: 0 }),<br>
+                        }));<br><br>
+                        
+                        <span class="code-comment">// Usage in component</span><br>
+                        <span class="code-keyword">function</span> <span class="code-function">Counter</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> { count, increase, decrease } = <span class="code-function">useStore</span>();<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={decrease}&gt;-&lt;/button&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;span&gt;{count}&lt;/span&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={increase}&gt;+&lt;/button&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </code>
+                </div>
+            </div>
+            
+            <div class="lib-card">
+                <div class="lib-header">
+                    <div class="lib-title">MobX</div>
+                    <div class="lib-badge">Reactive</div>
+                </div>
+                <p>Simple, scalable state management using observable patterns.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-keyword">import</span> { makeAutoObservable } <span class="code-keyword">from</span> <span class="code-string">"mobx"</span>;<br>
+                        <span class="code-keyword">import</span> { observer } <span class="code-keyword">from</span> <span class="code-string">"mobx-react-lite"</span>;<br><br>
+                        
+                        <span class="code-keyword">class</span> CounterStore {<br>
+                        &nbsp;&nbsp;count = 0;<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-function">constructor</span>() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">makeAutoObservable</span>(<span class="code-keyword">this</span>);<br>
+                        &nbsp;&nbsp;}<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-function">increment</span>() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">this</span>.count += 1;<br>
+                        &nbsp;&nbsp;}<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-function">decrement</span>() {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">this</span>.count -= 1;<br>
+                        &nbsp;&nbsp;}<br>
+                        }<br><br>
+                        
+                        <span class="code-keyword">const</span> counterStore = <span class="code-keyword">new</span> <span class="code-function">CounterStore</span>();<br><br>
+                        
+                        <span class="code-keyword">const</span> Counter = <span class="code-function">observer</span>(() => (<br>
+                        &nbsp;&nbsp;&lt;div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() => counterStore.<span class="code-function">decrement</span>()}&gt;-&lt;/button&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;span&gt;{counterStore.count}&lt;/span&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;button onClick={() => counterStore.<span class="code-function">increment</span>()}&gt;+&lt;/button&gt;<br>
+                        &nbsp;&nbsp;&lt;/div&gt;<br>
+                        ));
+                    </code>
+                </div>
+            </div>
+            
+            <div class="comparison-table">
+                <div class="comparison-card">
+                    <h5>State Management Comparison</h5>
+                    <table class="table">
+                        <tr>
+                            <th>Library</th>
+                            <th>Size</th>
+                            <th>Learning Curve</th>
+                            <th>Best For</th>
+                        </tr>
+                        <tr>
+                            <td>Context API</td>
+                            <td>0KB</td>
+                            <td>Easy</td>
+                            <td>Simple apps, themes</td>
+                        </tr>
+                        <tr>
+                            <td>Redux Toolkit</td>
+                            <td>~30KB</td>
+                            <td>Medium</td>
+                            <td>Large apps, teams</td>
+                        </tr>
+                        <tr>
+                            <td>Zustand</td>
+                            <td>~1.5KB</td>
+                            <td>Easy</td>
+                            <td>Small to medium apps</td>
+                        </tr>
+                        <tr>
+                            <td>MobX</td>
+                            <td>~16KB</td>
+                            <td>Medium</td>
+                            <td>Reactive patterns</td>
+                        </tr>
+                        <tr>
+                            <td>Recoil</td>
+                            <td>~15KB</td>
+                            <td>Medium</td>
+                            <td>Experimental, Facebook</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- UI Frameworks Chapter -->
+        <div class="chapter" id="ui-frameworks">
+            <h2><i class="fas fa-palette"></i> UI Frameworks & Libraries</h2>
+            
+            <div class="lib-card">
+                <div class="lib-header">
+                    <div class="lib-title">Material-UI (MUI)</div>
+                    <div class="lib-badge">Popular</div>
+                </div>
+                <p>React components for faster and easier web development based on Google's Material Design.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Installation</span><br>
+                        npm install @mui/material @emotion/react @emotion/styled<br>
+                        npm install @mui/icons-material<br><br>
+                        
+                        <span class="code-comment">// Basic usage</span><br>
+                        <span class="code-keyword">import</span> { Button, TextField, Card, CardContent } <span class="code-keyword">from</span> <span class="code-string">'@mui/material'</span>;<br>
+                        <span class="code-keyword">import</span> { Delete } <span class="code-keyword">from</span> <span class="code-string">'@mui/icons-material'</span>;<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">App</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;Card&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;CardContent&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;TextField label=<span class="code-string">"Name"</span> variant=<span class="code-string">"outlined"</span> /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Button<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;variant=<span class="code-string">"contained"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color=<span class="code-string">"primary"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;startIcon={&lt;Delete /&gt;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Delete<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Button&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/CardContent&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/Card&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }<br><br>
+                        
+                        <span class="code-comment">// Theme customization</span><br>
+                        <span class="code-keyword">import</span> { createTheme, ThemeProvider } <span class="code-keyword">from</span> <span class="code-string">'@mui/material/styles'</span>;<br><br>
+                        
+                        <span class="code-keyword">const</span> theme = <span class="code-function">createTheme</span>({<br>
+                        &nbsp;&nbsp;palette: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;primary: { main: <span class="code-string">'#1976d2'</span> },<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;secondary: { main: <span class="code-string">'#dc004e'</span> },<br>
+                        &nbsp;&nbsp;},<br>
+                        });<br><br>
+                        
+                        &lt;ThemeProvider theme={theme}&gt;<br>
+                        &nbsp;&nbsp;&lt;App /&gt;<br>
+                        &lt;/ThemeProvider&gt;
+                    </code>
+                </div>
+            </div>
+            
+            <div class="lib-card">
+                <div class="lib-header">
+                    <div class="lib-title">Ant Design</div>
+                    <div class="lib-badge">Enterprise</div>
+                </div>
+                <p>Enterprise-class UI design language and React UI library.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Installation</span><br>
+                        npm install antd<br><br>
+                        
+                        <span class="code-comment">// Import styles</span><br>
+                        <span class="code-keyword">import</span> <span class="code-string">'antd/dist/antd.css'</span>;<br>
+                        <span class="code-comment">// or for custom theme</span><br>
+                        <span class="code-keyword">import</span> <span class="code-string">'antd/dist/antd.less'</span>;<br><br>
+                        
+                        <span class="code-keyword">import</span> { DatePicker, Button, Table, Modal } <span class="code-keyword">from</span> <span class="code-string">'antd'</span>;<br>
+                        <span class="code-keyword">import</span> { UserOutlined } <span class="code-keyword">from</span> <span class="code-string">'@ant-design/icons'</span>;<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">App</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;DatePicker /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Button type=<span class="code-string">"primary"</span> icon={<span class="code-string">&lt;UserOutlined /&gt;</span>}&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Primary Button<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Button&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </code>
+                </div>
+            </div>
+            
+            <div class="lib-card">
+                <div class="lib-header">
+                    <div class="lib-title">React Bootstrap</div>
+                    <div class="lib-badge">Familiar</div>
+                </div>
+                <p>Bootstrap components built with React.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Installation</span><br>
+                        npm install react-bootstrap bootstrap<br><br>
+                        
+                        <span class="code-comment">// Import Bootstrap CSS</span><br>
+                        <span class="code-keyword">import</span> <span class="code-string">'bootstrap/dist/css/bootstrap.min.css'</span>;<br>
+                        <span class="code-keyword">import</span> { Button, Card, Container, Row, Col } <span class="code-keyword">from</span> <span class="code-string">'react-bootstrap'</span>;<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">App</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;Container&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Row&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Col&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Card&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Card.Body&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Card.Title&gt;Card Title&lt;/Card.Title&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Card.Text&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Some quick example text.<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Card.Text&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Button variant=<span class="code-string">"primary"</span>&gt;Go somewhere&lt;/Button&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Card.Body&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Card&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Col&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Row&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/Container&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </code>
+                </div>
+            </div>
+            
+            <div class="lib-card">
+                <div class="lib-header">
+                    <div class="lib-title">Chakra UI</div>
+                    <div class="lib-badge">Accessible</div>
+                </div>
+                <p>Simple, modular and accessible component library.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Installation</span><br>
+                        npm install @chakra-ui/react @emotion/react @emotion/styled framer-motion<br><br>
+                        
+                        <span class="code-keyword">import</span> { ChakraProvider, Box, Button, Heading } <span class="code-keyword">from</span> <span class="code-string">'@chakra-ui/react'</span>;<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">App</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;ChakraProvider&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Box p={5}&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Heading mb={4}&gt;Welcome&lt;/Heading&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Button colorScheme=<span class="code-string">"blue"</span>&gt;Button&lt;/Button&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Box&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/ChakraProvider&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </code>
+                </div>
+            </div>
+            
+            <div class="comparison-table">
+                <div class="comparison-card">
+                    <h5>UI Framework Comparison</h5>
+                    <table class="table">
+                        <tr>
+                            <th>Framework</th>
+                            <th>Size</th>
+                            <th>Customization</th>
+                            <th>Best For</th>
+                        </tr>
+                        <tr>
+                            <td>Material-UI</td>
+                            <td>~200KB</td>
+                            <td>High</td>
+                            <td>Material Design apps</td>
+                        </tr>
+                        <tr>
+                            <td>Ant Design</td>
+                            <td>~1MB</td>
+                            <td>Medium</td>
+                            <td>Enterprise dashboards</td>
+                        </tr>
+                        <tr>
+                            <td>React Bootstrap</td>
+                            <td>~50KB + Bootstrap</td>
+                            <td>Medium</td>
+                            <td>Bootstrap familiarity</td>
+                        </tr>
+                        <tr>
+                            <td>Chakra UI</td>
+                            <td>~150KB</td>
+                            <td>High</td>
+                            <td>Accessibility focus</td>
+                        </tr>
+                        <tr>
+                            <td>Tailwind CSS</td>
+                            <td>~50KB</td>
+                            <td>Very High</td>
+                            <td>Custom designs</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Tailwind CSS with React</h4>
+                <p>Utility-first CSS framework for rapidly building custom designs.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Installation</span><br>
+                        npm install -D tailwindcss postcss autoprefixer<br>
+                        npx tailwindcss init<br><br>
+                        
+                        <span class="code-comment">// tailwind.config.js</span><br>
+                        module.exports = {<br>
+                        &nbsp;&nbsp;content: [<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"./src/**/*.{js,jsx,ts,tsx}"</span>,<br>
+                        &nbsp;&nbsp;],<br>
+                        &nbsp;&nbsp;theme: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;extend: {},<br>
+                        &nbsp;&nbsp;},<br>
+                        &nbsp;&nbsp;plugins: [],<br>
+                        }<br><br>
+                        
+                        <span class="code-comment">// index.css</span><br>
+                        @tailwind base;<br>
+                        @tailwind components;<br>
+                        @tailwind utilities;<br><br>
+                        
+                        <span class="code-comment">// React Component</span><br>
+                        <span class="code-keyword">function</span> <span class="code-function">Card</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div className=<span class="code-string">"max-w-sm rounded overflow-hidden shadow-lg"</span>&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div className=<span class="code-string">"px-6 py-4"</span>&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div className=<span class="code-string">"font-bold text-xl mb-2"</span>&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The Coldest Sunset<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p className=<span class="code-string">"text-gray-700 text-base"</span>&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet.<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/p&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </code>
+                </div>
+            </div>
+        </div>
+        
+        <!-- API Integration Chapter -->
+        <div class="chapter" id="apis">
+            <h2><i class="fas fa-server"></i> API Integration</h2>
+            
+            <div class="concept-card">
+                <h4>1. Fetch API (Built-in)</h4>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-keyword">function</span> <span class="code-function">Users</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> [users, setUsers] = <span class="code-function">useState</span>([]);<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> [loading, setLoading] = <span class="code-keyword">useState</span>(true);<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> [error, setError] = <span class="code-keyword">useState</span>(null);<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-function">useEffect</span>(() => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> <span class="code-function">fetchUsers</span> = async () => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">try</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> response = await <span class="code-function">fetch</span>(<span class="code-string">'https://api.example.com/users'</span>);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> (!response.ok) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">throw new</span> <span class="code-function">Error</span>(<span class="code-string">'Network response was not ok'</span>);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> data = await response.<span class="code-function">json</span>();<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">setUsers</span>(data);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="code-keyword">catch</span> (error) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">setError</span>(error.message);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <span class="code-keyword">finally</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">setLoading</span>(false);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;};<br><br>
+                        
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">fetchUsers</span>();<br>
+                        &nbsp;&nbsp;}, []);<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">if</span> (loading) <span class="code-keyword">return</span> &lt;div&gt;Loading...&lt;/div&gt;;<br>
+                        &nbsp;&nbsp;<span class="code-keyword">if</span> (error) <span class="code-keyword">return</span> &lt;div&gt;Error: {error}&lt;/div&gt;;<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{users.<span class="code-function">map</span>(user => (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li key={user.id}&gt;{user.name}&lt;/li&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </code>
+                </div>
+            </div>
+            
+            <div class="lib-card">
+                <div class="lib-header">
+                    <div class="lib-title">Axios</div>
+                    <div class="lib-badge">Popular</div>
+                </div>
+                <p>Promise-based HTTP client for the browser and Node.js.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Installation</span><br>
+                        npm install axios<br><br>
+                        
+                        <span class="code-keyword">import</span> axios <span class="code-keyword">from</span> <span class="code-string">'axios'</span>;<br><br>
+                        
+                        <span class="code-comment">// Creating instance with defaults</span><br>
+                        <span class="code-keyword">const</span> api = axios.<span class="code-function">create</span>({<br>
+                        &nbsp;&nbsp;baseURL: <span class="code-string">'https://api.example.com'</span>,<br>
+                        &nbsp;&nbsp;timeout: 1000,<br>
+                        &nbsp;&nbsp;headers: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">'Content-Type'</span>: <span class="code-string">'application/json'</span>,<br>
+                        &nbsp;&nbsp;},<br>
+                        });<br><br>
+                        
+                        <span class="code-comment">// Request interceptor</span><br>
+                        api.interceptors.request.<span class="code-function">use</span>(<br>
+                        &nbsp;&nbsp;(config) => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> token = localStorage.<span class="code-function">getItem</span>(<span class="code-string">'token'</span>);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> (token) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;config.headers.Authorization = <span class="code-string">`Bearer </span>${token}<span class="code-string">`</span>;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> config;<br>
+                        &nbsp;&nbsp;},<br>
+                        &nbsp;&nbsp;(error) => Promise.<span class="code-function">reject</span>(error)<br>
+                        );<br><br>
+                        
+                        <span class="code-comment">// Response interceptor</span><br>
+                        api.interceptors.response.<span class="code-function">use</span>(<br>
+                        &nbsp;&nbsp;(response) => response,<br>
+                        &nbsp;&nbsp;(error) => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span> (error.response?.status === 401) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-comment">// Handle unauthorized</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> Promise.<span class="code-function">reject</span>(error);<br>
+                        &nbsp;&nbsp;}<br>
+                        );<br><br>
+                        
+                        <span class="code-comment">// Using in component</span><br>
+                        <span class="code-keyword">const</span> <span class="code-function">fetchUsers</span> = async () => {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">try</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> response = await api.<span class="code-function">get</span>(<span class="code-string">'/users'</span>);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">setUsers</span>(response.data);<br>
+                        &nbsp;&nbsp;} <span class="code-keyword">catch</span> (error) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="code-function">log</span>(<span class="code-string">'Error fetching users:'</span>, error);<br>
+                        &nbsp;&nbsp;}<br>
+                        };
+                    </code>
+                </div>
+            </div>
+            
+            <div class="lib-card">
+                <div class="lib-header">
+                    <div class="lib-title">React Query (TanStack Query)</div>
+                    <div class="lib-badge">Modern</div>
+                </div>
+                <p>Powerful data synchronization for React.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Installation</span><br>
+                        npm install @tanstack/react-query<br><br>
+                        
+                        <span class="code-keyword">import</span> { QueryClient, QueryClientProvider, useQuery } <span class="code-keyword">from</span> <span class="code-string">'@tanstack/react-query'</span>;<br><br>
+                        
+                        <span class="code-keyword">const</span> queryClient = <span class="code-keyword">new</span> <span class="code-function">QueryClient</span>();<br><br>
+                        <span class="code-keyword">function</span> <span class="code-function">App</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;QueryClientProvider client={queryClient}&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Users /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/QueryClientProvider&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">Users</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> { isLoading, error, data } = <span class="code-function">useQuery</span>({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;queryKey: [<span class="code-string">'users'</span>],<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;queryFn: () =><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">fetch</span>(<span class="code-string">'https://api.example.com/users'</span>).<span class="code-function">then</span>(res =><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;res.<span class="code-function">json</span>()<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;),<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;staleTime: 5 * 60 * 1000, <span class="code-comment">// 5 minutes</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;retry: 3,<br>
+                        });<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">if</span> (isLoading) <span class="code-keyword">return</span> <span class="code-string">'Loading...'</span>;<br>
+                        &nbsp;&nbsp;<span class="code-keyword">if</span> (error) <span class="code-keyword">return</span> <span class="code-string">'An error occurred: '</span> + error.message;<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{data.<span class="code-function">map</span>(user => (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li key={user.id}&gt;{user.name}&lt;/li&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;))}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Custom API Hook</h4>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-keyword">import</span> { useState, useCallback } <span class="code-keyword">from</span> <span class="code-string">'react'</span>;<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">useApi</span>(apiFunction) {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> [data, setData] = <span class="code-function">useState</span>(null);<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> [loading, setLoading] = <span class="code-function">useState</span>(false);<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> [error, setError] = <span class="code-function">useState</span>(null);<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> execute = <span class="code-function">useCallback</span>(async (...args) => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">try</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">setLoading</span>(true);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">setError</span>(null);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">const</span> result = await <span class="code-function">apiFunction</span>(...args);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">setData</span>(result);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> result;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;} <span class="code-keyword">catch</span> (err) {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">setError</span>(err.message || <span class="code-string">'Something went wrong'</span>);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">throw</span> err;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;} <span class="code-keyword">finally</span> {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-function">setLoading</span>(false);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;}, [apiFunction]);<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> { data, loading, error, execute };<br>
+                        }<br><br>
+                        
+                        <span class="code-comment">// Usage</span><br>
+                        <span class="code-keyword">const</span> <span class="code-function">fetchUsers</span> = () => api.<span class="code-function">get</span>(<span class="code-string">'/users'</span>);<br>
+                        <span class="code-keyword">const</span> { data: users, loading, error, execute: fetch } = <span class="code-function">useApi</span>(fetchUsers);<br><br>
+                        
+                        <span class="code-function">useEffect</span>(() => {<br>
+                        &nbsp;&nbsp;<span class="code-function">fetch</span>();<br>
+                        &nbsp;&nbsp;<span class="code-comment">// eslint-disable-next-line react-hooks/exhaustive-deps</span><br>
+                        }, []);
+                    </code>
+                </div>
+            </div>
+            
+            <div class="best-practice">
+                <h5><i class="fas fa-check-circle"></i> API Best Practices</h5>
+                <ul>
+                    <li>Use environment variables for API URLs</li>
+                    <li>Implement request cancellation with AbortController</li>
+                    <li>Add proper error handling and user feedback</li>
+                    <li>Implement loading states and skeletons</li>
+                    <li>Use caching strategies (React Query, SWR)</li>
+                    <li>Add request retry logic for transient failures</li>
+                    <li>Implement rate limiting on the client side</li>
+                    <li>Use TypeScript for API response types</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Performance Chapter -->
+        <div class="chapter" id="performance">
+            <h2><i class="fas fa-tachometer-alt"></i> Performance Optimization</h2>
+            
+            <div class="concept-card">
+                <h4>1. React.memo</h4>
+                <p>Prevents unnecessary re-renders of functional components.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-keyword">const</span> ExpensiveComponent = React.<span class="code-function">memo</span>(({ data }) => {<br>
+                        &nbsp;&nbsp;console.<span class="code-function">log</span>(<span class="code-string">'Rendering expensive component'</span>);<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> &lt;div&gt;{data}&lt;/div&gt;;<br>
+                        });<br><br>
+                        
+                        <span class="code-comment">// Custom comparison function</span><br>
+                        <span class="code-keyword">const</span> areEqual = (prevProps, nextProps) => {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> prevProps.data.id === nextProps.data.id;<br>
+                        };<br><br>
+                        
+                        <span class="code-keyword">const</span> CustomMemoComponent = React.<span class="code-function">memo</span>(ExpensiveComponent, areEqual);
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>2. useMemo</h4>
+                <p>Memoizes expensive calculations.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-keyword">function</span> <span class="code-function">ExpensiveComponent</span>({ items, filter }) {<br>
+                        &nbsp;&nbsp;<span class="code-comment">// Only recalculates when items or filter changes</span><br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> filteredItems = <span class="code-function">useMemo</span>(() => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-keyword">return</span> items.<span class="code-function">filter</span>(item =><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;item.name.<span class="code-function">toLowerCase</span>().<span class="code-function">includes</span>(filter.<span class="code-function">toLowerCase</span>())<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;);<br>
+                        &nbsp;&nbsp;}, [items, filter]);<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> &lt;List items={filteredItems} /&gt;;<br>
+                        }
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>3. useCallback</h4>
+                <p>Memoizes callback functions to prevent unnecessary re-creations.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-keyword">function</span> <span class="code-function">ParentComponent</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> [count, setCount] = <span class="code-function">useState</span>(0);<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-comment">// This function is re-created on every render</span><br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> handleClick = () => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="code-function">log</span>(<span class="code-string">'Clicked'</span>);<br>
+                        &nbsp;&nbsp;};<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-comment">// This function is memoized</span><br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> memoizedHandleClick = <span class="code-function">useCallback</span>(() => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;console.<span class="code-function">log</span>(<span class="code-string">'Memoized click'</span>);<br>
+                        &nbsp;&nbsp;}, []);<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;ChildComponent onClick={memoizedHandleClick} /&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>4. Virtualization (react-window)</h4>
+                <p>Render only visible items in large lists.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Installation</span><br>
+                        npm install react-window<br><br>
+                        
+                        <span class="code-keyword">import</span> { FixedSizeList } <span class="code-keyword">from</span> <span class="code-string">'react-window'</span>;<br><br>
+                        
+                        <span class="code-keyword">const</span> Row = ({ index, style }) => (<br>
+                        &nbsp;&nbsp;&lt;div style={style}&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;Row {index}<br>
+                        &nbsp;&nbsp;&lt;/div&gt;<br>
+                        );<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">List</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;FixedSizeList<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height={400}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width={300}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;itemCount={1000}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;itemSize={35}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{Row}<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/FixedSizeList&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>5. Lazy Loading & Code Splitting</h4>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-keyword">import</span> React, { Suspense, lazy } <span class="code-keyword">from</span> <span class="code-string">'react'</span>;<br><br>
+                        
+                        <span class="code-comment">// Lazy load component</span><br>
+                        <span class="code-keyword">const</span> HeavyComponent = <span class="code-function">lazy</span>(() => <span class="code-function">import</span>(<span class="code-string">'./HeavyComponent'</span>));<br><br>
+                        
+                        <span class="code-keyword">function</span> <span class="code-function">App</span>() {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">return</span> (<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;div&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;Suspense fallback={<span class="code-string">&lt;div&gt;Loading...&lt;/div&gt;</span>}&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;HeavyComponent /&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/Suspense&gt;<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
+                        &nbsp;&nbsp;);<br>
+                        }<br><br>
+                        
+                        <span class="code-comment">// Route-based splitting</span><br>
+                        <span class="code-keyword">import</span> { BrowserRouter as Router, Routes, Route } <span class="code-keyword">from</span> <span class="code-string">'react-router-dom'</span>;<br><br>
+                        
+                        <span class="code-keyword">const</span> Home = <span class="code-function">lazy</span>(() => <span class="code-function">import</span>(<span class="code-string">'./Home'</span>));<br>
+                        <span class="code-keyword">const</span> About = <span class="code-function">lazy</span>(() => <span class="code-function">import</span>(<span class="code-string">'./About'</span>));<br>
+                        <span class="code-keyword">const</span> Contact = <span class="code-function">lazy</span>(() => <span class="code-function">import</span>(<span class="code-string">'./Contact'</span>));
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>6. Performance Monitoring</h4>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// React DevTools Profiler</span><br>
+                        <span class="code-comment">// 1. Install React DevTools extension</span><br>
+                        <span class="code-comment">// 2. Use Profiler tab to record interactions</span><br>
+                        <span class="code-comment">// 3. Analyze component render times</span><br><br>
+                        
+                        <span class="code-comment">// Using React.Profiler API</span><br>
+                        <span class="code-keyword">function</span> <span class="code-function">onRenderCallback</span>(<br>
+                        &nbsp;&nbsp;id, <span class="code-comment">// the "id" prop of the Profiler tree</span><br>
+                        &nbsp;&nbsp;phase, <span class="code-comment">// "mount" or "update"</span><br>
+                        &nbsp;&nbsp;actualDuration, <span class="code-comment">// time spent rendering</span><br>
+                        &nbsp;&nbsp;baseDuration, <span class="code-comment">// estimated render time</span><br>
+                        &nbsp;&nbsp;startTime, <span class="code-comment">// when React began rendering</span><br>
+                        &nbsp;&nbsp;commitTime, <span class="code-comment">// when React committed</span><br>
+                        &nbsp;&nbsp;interactions <span class="code-comment">// the Set of interactions</span><br>
+                        ) {<br>
+                        &nbsp;&nbsp;console.<span class="code-function">log</span>({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;id,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;phase,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;actualDuration,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;baseDuration,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;startTime,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;commitTime,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;interactions,<br>
+                        &nbsp;&nbsp;});<br>
+                        }<br><br>
+                        
+                        <span class="code-comment">// Wrap components with Profiler</span><br>
+                        &lt;React.Profiler id=<span class="code-string">"Navigation"</span> onRender={onRenderCallback}&gt;<br>
+                        &nbsp;&nbsp;&lt;Navigation /&gt;<br>
+                        &lt;/React.Profiler&gt;
+                    </code>
+                </div>
+            </div>
+            
+            <div class="best-practice">
+                <h5><i class="fas fa-check-circle"></i> Performance Checklist</h5>
+                <ul>
+                    <li>Use React.memo for pure components</li>
+                    <li>Memoize expensive calculations with useMemo</li>
+                    <li>Prevent function recreation with useCallback</li>
+                    <li>Implement virtualization for long lists</li>
+                    <li>Use code splitting and lazy loading</li>
+                    <li>Optimize images and assets</li>
+                    <li>Remove unnecessary dependencies from useEffect</li>
+                    <li>Use production builds for deployment</li>
+                    <li>Implement proper bundle splitting</li>
+                    <li>Monitor performance with React DevTools</li>
+                </ul>
+            </div>
+            
+            <div class="warning">
+                <h5><i class="fas fa-exclamation-triangle"></i> Common Performance Pitfalls</h5>
+                <ul>
+                    <li>Creating functions inside JSX (use useCallback)</li>
+                    <li>Passing new objects/arrays as props (memoize them)</li>
+                    <li>Not using keys in lists</li>
+                    <li>Overusing Context (can cause unnecessary re-renders)</li>
+                    <li>Not cleaning up effects (memory leaks)</li>
+                    <li>Rendering too many components at once</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Testing Chapter -->
+        <div class="chapter" id="testing">
+            <h2><i class="fas fa-vial"></i> Testing React Applications</h2>
+            
+            <div class="concept-card">
+                <h4>1. Jest + React Testing Library</h4>
+                <p>Recommended testing setup for React.</p>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Installation (comes with Create React App)</span><br>
+                        npm install --save-dev jest @testing-library/react @testing-library/jest-dom<br><br>
+                        
+                        <span class="code-comment">// Button.test.js</span><br>
+                        <span class="code-keyword">import</span> React <span class="code-keyword">from</span> <span class="code-string">'react'</span>;<br>
+                        <span class="code-keyword">import</span> { render, screen, fireEvent } <span class="code-keyword">from</span> <span class="code-string">'@testing-library/react'</span>;<br>
+                        <span class="code-keyword">import</span> Button <span class="code-keyword">from</span> <span class="code-string">'./Button'</span>;<br><br>
+                        
+                        <span class="code-function">test</span>(<span class="code-string">'renders button with text'</span>, () => {<br>
+                        &nbsp;&nbsp;<span class="code-function">render</span>(&lt;Button&gt;Click me&lt;/Button&gt;);<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> buttonElement = screen.<span class="code-function">getByText</span>(<span class="code-string">/click me/i</span>);<br>
+                        &nbsp;&nbsp;<span class="code-function">expect</span>(buttonElement).<span class="code-function">toBeInTheDocument</span>();<br>
+                        });<br><br>
+                        
+                        <span class="code-function">test</span>(<span class="code-string">'calls onClick when clicked'</span>, () => {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> handleClick = jest.<span class="code-function">fn</span>();<br>
+                        &nbsp;&nbsp;<span class="code-function">render</span>(&lt;Button onClick={handleClick}&gt;Click me&lt;/Button&gt;);<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> buttonElement = screen.<span class="code-function">getByText</span>(<span class="code-string">/click me/i</span>);<br>
+                        &nbsp;&nbsp;<span class="code-function">fireEvent</span>.<span class="code-function">click</span>(buttonElement);<br>
+                        &nbsp;&nbsp;<span class="code-function">expect</span>(handleClick).<span class="code-function">toHaveBeenCalledTimes</span>(1);<br>
+                        });
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>2. Testing Hooks</h4>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// useCounter.test.js</span><br>
+                        <span class="code-keyword">import</span> { renderHook, act } <span class="code-keyword">from</span> <span class="code-string">'@testing-library/react'</span>;<br>
+                        <span class="code-keyword">import</span> useCounter <span class="code-keyword">from</span> <span class="code-string">'./useCounter'</span>;<br><br>
+                        
+                        <span class="code-function">test</span>(<span class="code-string">'should increment counter'</span>, () => {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> { result } = <span class="code-function">renderHook</span>(() => <span class="code-function">useCounter</span>());<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-function">expect</span>(result.current.count).<span class="code-function">toBe</span>(0);<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-function">act</span>(() => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;result.current.<span class="code-function">increment</span>();<br>
+                        &nbsp;&nbsp;});<br><br>
+                        &nbsp;&nbsp;<span class="code-function">expect</span>(result.current.count).<span class="code-function">toBe</span>(1);<br>
+                        });<br><br>
+                        
+                        <span class="code-function">test</span>(<span class="code-string">'should reset counter'</span>, () => {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> { result } = <span class="code-function">renderHook</span>(() => <span class="code-function">useCounter</span>());<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-function">act</span>(() => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;result.current.<span class="code-function">increment</span>();<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;result.current.<span class="code-function">increment</span>();<br>
+                        &nbsp;&nbsp;});<br><br>
+                        &nbsp;&nbsp;<span class="code-function">expect</span>(result.current.count).<span class="code-function">toBe</span>(2);<br><br>
+                        &nbsp;&nbsp;<span class="code-function">act</span>(() => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;result.current.<span class="code-function">reset</span>();<br>
+                        &nbsp;&nbsp;});<br><br>
+                        &nbsp;&nbsp;<span class="code-function">expect</span>(result.current.count).<span class="code-function">toBe</span>(0);<br>
+                        });
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>3. Testing Async Code</h4>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-function">test</span>(<span class="code-string">'fetches and displays data'</span>, async () => {<br>
+                        &nbsp;&nbsp;<span class="comment">// Mock the fetch function</span><br>
+                        &nbsp;&nbsp;global.fetch = jest.<span class="code-function">fn</span>().<span class="code-function">mockResolvedValue</span>({<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;ok: true,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;json: () => Promise.<span class="code-function">resolve</span>([<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ id: 1, name: <span class="code-string">'John'</span> },<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{ id: 2, name: <span class="code-string">'Jane'</span> },<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;]),<br>
+                        &nbsp;&nbsp;});<br><br>
+                        
+                        &nbsp;&nbsp;<span class="code-function">render</span>(&lt;UserList /&gt;);<br><br>
+                        
+                        &nbsp;&nbsp;<span class="comment">// Wait for data to load</span><br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> listItems = await screen.<span class="code-function">findAllByRole</span>(<span class="code-string">'listitem'</span>);<br>
+                        &nbsp;&nbsp;<span class="code-function">expect</span>(listItems).<span class="code-function">toHaveLength</span>(2);<br>
+                        &nbsp;&nbsp;<span class="code-function">expect</span>(screen.<span class="code-function">getByText</span>(<span class="code-string">'John'</span>)).<span class="code-function">toBeInTheDocument</span>();<br>
+                        });
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>4. Snapshot Testing</h4>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-function">test</span>(<span class="code-string">'renders correctly'</span>, () => {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">const</span> { container } = <span class="code-function">render</span>(&lt;Button&gt;Click me&lt;/Button&gt;);<br>
+                        &nbsp;&nbsp;<span class="code-function">expect</span>(container.firstChild).<span class="code-function">toMatchSnapshot</span>();<br>
+                        });<br><br>
+                        
+                        <span class="code-comment">// Update snapshots</span><br>
+                        npm test -- --updateSnapshot
+                    </code>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>5. End-to-End Testing (Cypress)</h4>
+                
+                <div class="code-block">
+                    <code>
+                        <span class="code-comment">// Installation</span><br>
+                        npm install cypress --save-dev<br><br>
+                        
+                        <span class="code-comment">// cypress/e2e/login.cy.js</span><br>
+                        <span class="code-function">describe</span>(<span class="code-string">'Login Page'</span>, () => {<br>
+                        &nbsp;&nbsp;<span class="code-keyword">it</span>(<span class="code-string">'should login successfully'</span>, () => {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;cy.<span class="code-function">visit</span>(<span class="code-string">'/login'</span>);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;cy.<span class="code-function">get</span>(<span class="code-string">'[data-testid="email"]'</span>).<span class="code-function">type</span>(<span class="code-string">'user@example.com'</span>);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;cy.<span class="code-function">get</span>(<span class="code-string">'[data-testid="password"]'</span>).<span class="code-function">type</span>(<span class="code-string">'password123'</span>);<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;cy.<span class="code-function">get</span>(<span class="code-string">'[data-testid="submit"]'</span>).<span class="code-function">click</span>();<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;cy.<span class="code-function">url</span>().<span class="code-function">should</span>(<span class="code-string">'include'</span>, <span class="code-string">'/dashboard'</span>);<br>
+                        &nbsp;&nbsp;});<br>
+                        });
+                    </code>
+                </div>
+            </div>
+            
+            <div class="best-practice">
+                <h5><i class="fas fa-check-circle"></i> Testing Best Practices</h5>
+                <ul>
+                    <li>Test behavior, not implementation</li>
+                    <li>Use data-testid attributes for selectors</li>
+                    <li>Avoid testing third-party libraries</li>
+                    <li>Mock external dependencies</li>
+                    <li>Write tests that resemble how users interact</li>
+                    <li>Test edge cases and error states</li>
+                    <li>Keep tests independent and isolated</li>
+                    <li>Use beforeEach/afterEach for setup/cleanup</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Deployment Chapter -->
+        <div class="chapter" id="deployment">
+            <h2><i class="fas fa-cloud-upload-alt"></i> Deployment & Production</h2>
+            
+            <div class="step-by-step">
+                <div class="step">
+                    <h4>1. Building for Production</h4>
+                    <p>Create an optimized production build:</p>
+                    <div class="code-block">
+                        npm run build
+                    </div>
+                    <p>This creates a <code>build/</code> folder with minified and optimized files.</p>
+                </div>
+                
+                <div class="step">
+                    <h4>2. Environment Variables</h4>
+                    <p>Create <code>.env</code> files for different environments:</p>
+                    <div class="code-block">
+                        <span class="code-comment"># .env.development</span><br>
+                        REACT_APP_API_URL=http://localhost:3000/api<br>
+                        REACT_APP_DEBUG=true<br><br>
+                        
+                        <span class="code-comment"># .env.production</span><br>
+                        REACT_APP_API_URL=https://api.example.com<br>
+                        REACT_APP_DEBUG=false
+                    </div>
+                    <p>Access in code: <code>process.env.REACT_APP_API_URL</code></p>
+                </div>
+                
+                <div class="step">
+                    <h4>3. Deployment Platforms</h4>
+                    
+                    <div class="comparison-table">
+                        <div class="comparison-card">
+                            <h5>Vercel</h5>
+                            <p>Excellent for Next.js, automatic deployments</p>
+                            <code>vercel --prod</code>
+                        </div>
+                        
+                        <div class="comparison-card">
+                            <h5>Netlify</h5>
+                            <p>Great for static sites, easy CI/CD</p>
+                            <code>netlify deploy --prod</code>
+                        </div>
+                        
+                        <div class="comparison-card">
+                            <h5>AWS Amplify</h5>
+                            <p>Full-stack, AWS integration</p>
+                            <code>amplify publish</code>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <h4>4. Docker Deployment</h4>
+                    
+                    <div class="code-block">
+                        <span class="code-comment"># Dockerfile</span><br>
+                        FROM node:18-alpine AS build<br>
+                        WORKDIR /app<br>
+                        COPY package*.json ./<br>
+                        RUN npm ci --only=production<br>
+                        COPY . .<br>
+                        RUN npm run build<br><br>
+                        
+                        FROM nginx:alpine<br>
+                        COPY --from=build /app/build /usr/share/nginx/html<br>
+                        COPY nginx.conf /etc/nginx/conf.d/default.conf<br>
+                        EXPOSE 80<br>
+                        CMD ["nginx", "-g", "daemon off;"]<br><br>
+                        
+                        <span class="code-comment"># Build and run</span><br>
+                        docker build -t react-app .<br>
+                        docker run -p 80:80 react-app
+                    </div>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>5. CI/CD Pipeline (GitHub Actions)</h4>
+                
+                <div class="code-block">
+                    <span class="code-comment"># .github/workflows/deploy.yml</span><br>
+                    name: Deploy React App<br><br>
+                    
+                    on:<br>
+                    &nbsp;&nbsp;push:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;branches: [ main ]<br>
+                    &nbsp;&nbsp;pull_request:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;branches: [ main ]<br><br>
+                    
+                    jobs:<br>
+                    &nbsp;&nbsp;build-and-deploy:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;runs-on: ubuntu-latest<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;steps:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- uses: actions/checkout@v3<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- uses: actions/setup-node@v3<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;node-version: 18<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cache: 'npm'<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- run: npm ci<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- run: npm run build<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- run: npm test<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- uses: peaceiris/actions-gh-pages@v3<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;with:<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;github_token: ${{ secrets.GITHUB_TOKEN }}<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;publish_dir: ./build
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>6. Performance Monitoring in Production</h4>
+                
+                <div class="code-block">
+                    <span class="code-comment">// Track errors with Sentry</span><br>
+                    npm install @sentry/react @sentry/tracing<br><br>
+                    
+                    <span class="code-keyword">import</span> * as Sentry <span class="code-keyword">from</span> <span class="code-string">"@sentry/react"</span>;<br>
+                    <span class="code-keyword">import</span> { BrowserTracing } <span class="code-keyword">from</span> <span class="code-string">"@sentry/tracing"</span>;<br><br>
+                    
+                    Sentry.<span class="code-function">init</span>({<br>
+                    &nbsp;&nbsp;dsn: <span class="code-string">"YOUR_DSN_HERE"</span>,<br>
+                    &nbsp;&nbsp;integrations: [<span class="code-keyword">new</span> <span class="code-function">BrowserTracing</span>()],<br>
+                    &nbsp;&nbsp;tracesSampleRate: 1.0,<br>
+                    });<br><br>
+                    
+                    <span class="code-comment">// Wrap your app</span><br>
+                    &lt;Sentry.ErrorBoundary&gt;<br>
+                    &nbsp;&nbsp;&lt;App /&gt;<br>
+                    &lt;/Sentry.ErrorBoundary&gt;
+                </div>
+            </div>
+        </div>
+        
+        <!-- Best Practices Chapter -->
+        <div class="chapter" id="best-practices">
+            <h2><i class="fas fa-graduation-cap"></i> Best Practices & Patterns</h2>
+            
+            <div class="concept-card">
+                <h4>1. Project Structure</h4>
+                
+                <div class="code-block">
+                    <span class="code-comment"># Recommended Structure</span><br>
+                    src/<br>
+                    ├── assets/              <span class="code-comment"># Images, fonts, icons</span><br>
+                    ├── components/          <span class="code-comment"># Reusable components</span><br>
+                    │   ├── common/         <span class="code-comment"># Button, Input, Modal</span><br>
+                    │   ├── layout/         <span class="code-comment"># Header, Footer, Sidebar</span><br>
+                    │   └── features/       <span class="code-comment"># Feature-specific components</span><br>
+                    ├── hooks/              <span class="code-comment"># Custom hooks</span><br>
+                    ├── utils/              <span class="code-comment"># Utility functions</span><br>
+                    ├── services/           <span class="code-comment"># API services</span><br>
+                    ├── store/              <span class="code-comment"># Redux store</span><br>
+                    ├── types/              <span class="code-comment"># TypeScript types</span><br>
+                    ├── pages/              <span class="code-comment"># Page components</span><br>
+                    ├── routes/             <span class="code-comment"># Route configurations</span><br>
+                    ├── styles/             <span class="code-comment"># Global styles</span><br>
+                    ├── App.jsx<br>
+                    └── index.jsx
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>2. Component Design Principles</h4>
+                
+                <div class="best-practice">
+                    <h5>Single Responsibility Principle</h5>
+                    <p>Each component should do one thing well.</p>
+                </div>
+                
+                <div class="best-practice">
+                    <h5>Composition over Inheritance</h5>
+                    <p>Build complex UIs from simple components.</p>
+                </div>
+                
+                <div class="best-practice">
+                    <h5>Props Design</h5>
+                    <ul>
+                        <li>Use descriptive prop names</li>
+                        <li>Provide default values</li>
+                        <li>Use PropTypes or TypeScript</li>
+                        <li>Destructure props in function parameters</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>3. State Management Strategy</h4>
+                
+                <div class="step-by-step">
+                    <div class="step">
+                        <h5>Local State (useState)</h5>
+                        <p>For component-specific data (forms, toggles, counters)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <h5>Lifted State</h5>
+                        <p>Share state between sibling components via common parent</p>
+                    </div>
+                    
+                    <div class="step">
+                        <h5>Context API</h5>
+                        <p>Global state that doesn't change frequently (theme, auth)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <h5>State Management Library</h5>
+                        <p>Complex global state (Redux, Zustand, MobX)</p>
+                    </div>
+                    
+                    <div class="step">
+                        <h5>Server State</h5>
+                        <p>API data (React Query, SWR, RTK Query)</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>4. Code Quality & Maintenance</h4>
+                
+                <div class="best-practice">
+                    <h5>ESLint Configuration</h5>
+                    <div class="code-block">
+                        <span class="code-comment">// .eslintrc.js</span><br>
+                        module.exports = {<br>
+                        &nbsp;&nbsp;extends: [<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">'react-app'</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">'react-app/jest'</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">'plugin:react/recommended'</span>,<br>
+                        &nbsp;&nbsp;],<br>
+                        &nbsp;&nbsp;rules: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">'react/react-in-jsx-scope'</span>: <span class="code-string">'off'</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">'react/prop-types'</span>: <span class="code-string">'off'</span>,<br>
+                        &nbsp;&nbsp;},<br>
+                        };
+                    </div>
+                </div>
+                
+                <div class="best-practice">
+                    <h5>Prettier for Code Formatting</h5>
+                    <div class="code-block">
+                        <span class="code-comment">// .prettierrc</span><br>
+                        {<br>
+                        &nbsp;&nbsp;<span class="code-string">"semi"</span>: true,<br>
+                        &nbsp;&nbsp;<span class="code-string">"trailingComma"</span>: <span class="code-string">"es5"</span>,<br>
+                        &nbsp;&nbsp;<span class="code-string">"singleQuote"</span>: true,<br>
+                        &nbsp;&nbsp;<span class="code-string">"printWidth"</span>: 80,<br>
+                        &nbsp;&nbsp;<span class="code-string">"tabWidth"</span>: 2<br>
+                        }
+                    </div>
+                </div>
+                
+                <div class="best-practice">
+                    <h5>Husky for Git Hooks</h5>
+                    <div class="code-block">
+                        <span class="code-comment">// package.json</span><br>
+                        {<br>
+                        &nbsp;&nbsp;<span class="code-string">"husky"</span>: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"hooks"</span>: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"pre-commit"</span>: <span class="code-string">"lint-staged"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+                        &nbsp;&nbsp;},<br>
+                        &nbsp;&nbsp;<span class="code-string">"lint-staged"</span>: {<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"*.{js,jsx,ts,tsx}"</span>: [<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"eslint --fix"</span>,<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-string">"prettier --write"</span><br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;]<br>
+                        &nbsp;&nbsp;}<br>
+                        }
+                    </div>
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>5. Accessibility (a11y)</h4>
+                
+                <div class="best-practice">
+                    <h5>Essential Accessibility Practices</h5>
+                    <ul>
+                        <li>Use semantic HTML elements</li>
+                        <li>Add alt text to images</li>
+                        <li>Ensure keyboard navigation works</li>
+                        <li>Use ARIA attributes when necessary</li>
+                        <li>Maintain sufficient color contrast</li>
+                        <li>Provide focus indicators</li>
+                        <li>Test with screen readers</li>
+                    </ul>
+                </div>
+                
+                <div class="code-block">
+                    <span class="code-comment">// Good accessibility example</span><br>
+                    &lt;button<br>
+                    &nbsp;&nbsp;aria-label=<span class="code-string">"Close modal"</span><br>
+                    &nbsp;&nbsp;onClick={handleClose}<br>
+                    &nbsp;&nbsp;onKeyDown={(e) => e.key === <span class="code-string">'Enter'</span> && handleClose()}<br>
+                    &gt;<br>
+                    &nbsp;&nbsp;&lt;span aria-hidden=<span class="code-string">"true"</span>&gt;&times;&lt;/span&gt;<br>
+                    &lt;/button&gt;
+                </div>
+            </div>
+            
+            <div class="concept-card">
+                <h4>6. Security Best Practices</h4>
+                
+                <div class="warning">
+                    <h5><i class="fas fa-shield-alt"></i> Security Checklist</h5>
+                    <ul>
+                        <li>Never expose API keys in client-side code</li>
+                        <li>Use environment variables for sensitive data</li>
+                        <li>Sanitize user input to prevent XSS attacks</li>
+                        <li>Implement proper CORS policies</li>
+                        <li>Use HTTPS in production</li>
+                        <li>Keep dependencies updated</li>
+                        <li>Implement Content Security Policy (CSP)</li>
+                        <li>Use React's built-in XSS protection</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Resources Chapter -->
+        <div class="chapter" id="resources">
+            <h2><i class="fas fa-book"></i> Learning Resources</h2>
+            
+            <div class="concept-card">
+                <h4>Official Documentation</h4>
+                <ul>
+                    <li><a href="https://reactjs.org/docs/getting-started.html" target="_blank">React Official Docs</a></li>
+                    <li><a href="https://beta.reactjs.org/" target="_blank">React Beta Docs (New)</a></li>
+                    <li><a href="https://react.dev/" target="_blank">React.dev (Latest)</a></li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Recommended Courses</h4>
+                <ul>
+                    <li>React - The Complete Guide (Udemy)</li>
+                    <li>Epic React by Kent C. Dodds</li>
+                    <li>Fullstack Open (University of Helsinki)</li>
+                    <li>Frontend Masters React Courses</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h4>YouTube Channels</h4>
+                <ul>
+                    <li>Web Dev Simplified</li>
+                    <li>Codevolution</li>
+                    <li>Ben Awad</li>
+                    <li>Traversy Media</li>
+                    <li>Fireship</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Books</h4>
+                <ul>
+                    <li>Learning React by Alex Banks & Eve Porcello</li>
+                    <li>Fullstack React by Anthony Accomazzo</li>
+                    <li>React Explained by Zac Gordon</li>
+                    <li>The Road to React by Robin Wieruch</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Useful Tools</h4>
+                <ul>
+                    <li>React DevTools (Browser Extension)</li>
+                    <li>Create React App (Boilerplate)</li>
+                    <li>Vite (Build Tool)</li>
+                    <li>CodeSandbox (Online Editor)</li>
+                    <li>Storybook (Component Development)</li>
+                </ul>
+            </div>
+            
+            <div class="concept-card">
+                <h4>Communities</h4>
+                <ul>
+                    <li>Reactiflux (Discord)</li>
+                    <li>r/reactjs (Reddit)</li>
+                    <li>React StackOverflow</li>
+                    <li>React GitHub Discussions</li>
+                </ul>
+            </div>
+            
+            <div class="practical-example">
+                <h4>Learning Path Recommendation</h4>
+                <div class="step-by-step">
+                    <div class="step">1. React Fundamentals (Components, Props, State)</div>
+                    <div class="step">2. Hooks (useState, useEffect, useContext)</div>
+                    <div class="step">3. Routing (React Router)</div>
+                    <div class="step">4. State Management (Context API, Redux)</div>
+                    <div class="step">5. API Integration (Fetch, Axios, React Query)</div>
+                    <div class="step">6. UI Framework (Material-UI, Chakra UI)</div>
+                    <div class="step">7. Testing (Jest, React Testing Library)</div>
+                    <div class="step">8. Performance Optimization</div>
+                    <div class="step">9. Advanced Patterns</div>
+                    <div class="step">10. Deployment & CI/CD</div>
+                </div>
+            </div>
+            
+            <div class="important-note">
+                <h4><i class="fas fa-graduation-cap"></i> Final Advice</h4>
+                <p><strong>Practice is key!</strong> Build projects to reinforce learning:</p>
+                <ul>
+                    <li>Todo App</li>
+                    <li>Weather App</li>
+                    <li>E-commerce Site</li>
+                    <li>Social Media Dashboard</li>
+                    <li>Real-time Chat App</li>
+                </ul>
+                <p>Remember: Learning React is a journey. Start with fundamentals, build small projects, and gradually tackle more complex concepts.</p>
+            </div>
+        </div>
+        
+        <!-- Floating Back to Top Button -->
+        <div class="floating-btn" onclick="scrollToTop()">
+            <i class="fas fa-arrow-up"></i>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Progress bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        });
+        
+        // Smooth scroll for navigation
+        document.querySelectorAll('.sidebar-nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                document.querySelectorAll('.sidebar-nav a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 20,
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Update active link on scroll
+        const sections = document.querySelectorAll('.chapter');
+        const navLinks = document.querySelectorAll('.sidebar-nav a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+        
+        // Quiz functionality
+        function showAnswer(element, type) {
+            const options = element.parentElement.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.remove('correct', 'wrong');
+                opt.style.pointerEvents = 'none';
+            });
+            
+            element.classList.add(type);
+            
+            // Show explanation
+            const explanation = document.createElement('div');
+            explanation.className = 'mt-3';
+            if (type === 'correct') {
+                explanation.innerHTML = '<div class="status status-success"><strong>Correct!</strong> Props are read-only data passed from parent to child, while state is mutable data managed within the component.</div>';
+            } else {
+                explanation.innerHTML = '<div class="status status-error"><strong>Incorrect.</strong> Props are read-only, State is mutable. Remember: Props flow down, State stays local.</div>';
+            }
+            
+            element.parentElement.appendChild(explanation);
+        }
+        
+        // Scroll to top
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+        
+        // Copy code blocks
+        document.querySelectorAll('.code-block').forEach(block => {
+            block.addEventListener('click', () => {
+                const code = block.textContent;
+                navigator.clipboard.writeText(code).then(() => {
+                    const original = block.style.backgroundColor;
+                    block.style.backgroundColor = '#4CAF50';
+                    setTimeout(() => {
+                        block.style.backgroundColor = original;
+                    }, 500);
+                });
+            });
+        });
+        
+        // Mobile sidebar toggle
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('active');
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Highlight active section on load
+            const hash = window.location.hash || '#introduction';
+            const activeLink = document.querySelector(`.sidebar-nav a[href="${hash}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
